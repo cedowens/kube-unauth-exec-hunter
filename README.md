@@ -1,8 +1,8 @@
-Red Team SSH Password Sprayer
-Simple script to spray a username and password over ssh against a subnet. It must be run with python3 and uses the paramiko library for ssh authentication.
+# Shodan Searcher
 
-*This script currently does not include threading so it is not optimized for speed.
+Simple python script using the shodan API to search shodan. Run the script followed by your shodan search query and then enter your shodan api key to run the search.
 
-first install the paramiko library: pip3 install paramiko
+First: install the shodan library: pip3 install shodan
 
-usage: python3 ssh-sprayer.py
+Usage: python3 shodan-search.py <search query(ies)>
+
