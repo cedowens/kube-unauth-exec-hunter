@@ -1,4 +1,4 @@
-# Red Team Single Host SMB Password Checker
+# Red Team SMB Password Checker (Single Host)
 
 Simple python script to to check a username and password combination over smb on a given host. 
 
