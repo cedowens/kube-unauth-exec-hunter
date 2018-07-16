@@ -1,8 +1,10 @@
-# Red Team Port Access Checker
+# Red Team Single Host SMB Password Checker
 
-Simple python script to to check whether a socket connection can be established to a given port on each host within an IP range. The script will show what hosts the specified port is open on and write results to a file named "outfile.txt" in the current working directory.
+Simple python script to to check a username and password combination over smb on a given host. 
 
-First: install the python ipaddress library: pip3 install ipaddress
+In AD environments, be careful running this script to ensure you do not cause lockouts by running multiple checks using a single domain username.
 
-Usage: python3 portaccess-check.py
+Usage: python3 smb-single-test.py
+
+for domain joined systems, you can enter the domain or leave it blank when prompted (either will work).
 
