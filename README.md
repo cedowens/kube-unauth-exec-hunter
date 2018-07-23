@@ -1,10 +1,22 @@
-# Red Team SMB Password Checker (Single Host)
+# Red/Blue Team Gobbler Reconnaissance Tool
 
-Simple python script to to check a username and password combination over smb on a given host. 
+Gobbler is a python script that automates some of the initial data gethering steps during reconnaissance. To run Gobbler, you feed it a domain when prompted. 
 
-In AD environments, be careful running this script to ensure you do not cause lockouts by running multiple checks using a single domain username.
+For additinoal data gathering, you can enter a shodan API key when prompted, and it will search shodan, format the results, and write to a file.
 
-Usage: python3 smb-single-test.py
+Gobbler gathers data such as:
+-all ASN numbers for the domain searched
+-public facing IP blocks directly assigned to the domain you enter
+-dns NS, TXT, and MX records (good info can be gleaned from these such as where mail is hosted, if docusign or azure is used, etc.)
+-hosts of interest (login pages)
+-data seen by Shodan for the ASN 
 
-for domain joined systems, you can enter the domain or leave it blank when prompted (either will work).
+gobbler pulls the ASN information from mxtoolbox.com's ASN lookup, which I use frequently when searching ASN info for a domain.
+
+gobbler uses some libraries not included in the Python standard library, so first run:
+pip3 install -r requirements.txt
+
+Usage: "python3 gobbler.py" and enter in the domain to search along with your shodan API key when prompted for additional data.
+
+
 
