@@ -1,22 +1,32 @@
-# Red/Blue Team Gobbler Reconnaissance Tool
+# Red Team Threaded Port Scanner
 
-Gobbler is a python script that automates some of the initial data gethering steps during reconnaissance. To run Gobbler, you feed it a domain when prompted. 
+Python3 script that uses a queue and threads to concurrently scan the top 1000 most commonly used tcp ports on an IP range.
 
-For additinoal data gathering, you can enter a shodan API key when prompted, and it will search shodan, format the results, and write to a file.
+You can check the limit of the number of open file handles on your system by running:
 
-Gobbler gathers data such as:
--all ASN numbers for the domain searched
--public facing IP blocks directly assigned to the domain you enter
--dns NS, TXT, and MX records (good info can be gleaned from these such as where mail is hosted, if docusign or azure is used, etc.)
--hosts of interest (login pages)
--data seen by Shodan for the ASN 
+ulimit -n
 
-gobbler pulls the ASN information from mxtoolbox.com's ASN lookup, which I use frequently when searching ASN info for a domain.
+For Mac this number is often around 250. On Kali and other Linux distros this number is usually 1000+.
 
-gobbler uses some libraries not included in the Python standard library, so first run:
-pip3 install -r requirements.txt
+Since this is opens connections to ports and IPs concurrently, you'll need to set your thread number when promped accordingly.
 
-Usage: "python3 gobbler.py" and enter in the domain to search along with your shodan API key when prompted for additional data.
+Generally, I would recommend setting it to 250 on Mac systems and 1000 on Kali or other Linux distros.
 
+On average it takes about 8 mins on Mac to scan the top 1000 ports on a /24 netblock.
 
+On average it takes about 2 mins on Kali to scan the top 1000 ports on a /24 netblock.
+
+Usage: 
+
+python3 portscanner.py 
+
+The enter IP block and thread count when prompted.
+
+All hosts with open ports are written to a file in the current working directory named "scanresults.txt"
+
+-------------------------------------------
+
+DISCLAIMER
+
+Use at your own risk. Do not use without the appropriate authorizations.
 
