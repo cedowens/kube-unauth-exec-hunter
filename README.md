@@ -1,12 +1,6 @@
-# Red Team Threaded Port Sweeper
+# Red Team Threaded Port Scanner
 
-Threaded python3 script to sweep across an IP block and see what hosts have a specified port open.check whether a socket connection can be established to a given port on each host within an IP range. 
-
-Each IP address in the block is counted and the corresponding number of threads is created and run concurrently.
-
-Results are written to a file named "outfile.txt" in the current directory.
-
-Usage: python3 threaded-portsweepr.py
+Python3 script that uses a queue and threads to concurrently scan the top 1000 most commonly used tcp ports on an IP range.
 
 You can check the limit of the number of open file handles on your system by running:
 
@@ -18,13 +12,22 @@ Since this is opens connections to ports and IPs concurrently, you'll need to se
 
 Generally, I would recommend setting it to 250 on Mac systems and 1000 on Kali or other Linux distros.
 
-------------------------
+On average, with threads set to 250 it takes about 8 mins on Mac to scan the top 1000 ports on a /24 netblock.
 
-If you want to persistently up the ulimit on your host so that you can run more threads and complete the sweep faster, instructions are here:
+On average, with threads set to 1000 it takes about 2 mins on Kali to scan the top 1000 ports on a /24 netblock.
+
+Usage:
+
+python3 portscanner.py
+
+The enter IP block and thread count when prompted.
+
+All hosts with open ports are written to a file in the current working directory named "scanresults.txt"
+
+STEPS TO PERSISTENTLY INCREASE ulimit on Mac and Linux to allow for more threads:
 
 https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac
 
-------------------------
 DISCLAIMER
 
 Use at your own risk. Do not use without the appropriate authorizations.
