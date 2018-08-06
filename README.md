@@ -1,6 +1,10 @@
-# Red Team Threaded Port Scanner
+# Jenkins Hunter
 
-Python3 script that uses a queue and threads to concurrently scan the top 1000 most commonly used tcp ports on an IP range.
+Python3 script that uses a queue and threads to concurrently sweep an IP block for the port specified and then checks for unauthenticated Jenkins instances.
+
+This can be useful for both blue and red teams. From a red team perspective, unauthenticated Jenkins hosts provide quick initial access points for attackers and this script will help find these hosts quicker. From a blue team perspective, this script can be proactively run to identify unauthenticated Jenkins and remediate them before an attacker does.
+
+Since this script uses threading to run faster, you must first check the ulimit set on your host.
 
 You can check the limit of the number of open file handles on your system by running:
 
@@ -10,19 +14,15 @@ For Mac this number is often around 250. On Kali and other Linux distros this nu
 
 Since this is opens connections to ports and IPs concurrently, you'll need to set your thread number when promped accordingly.
 
-Generally, I would recommend setting it to 250 on Mac systems and 1000 on Kali or other Linux distros.
+Generally, I would recommend setting threads to 250 on Mac systems and 1000 on Kali or other Linux distros unless you follow the steps below to up the ulimit cap on your system.
 
-On average, with threads set to 250 it takes about 8 mins on Mac to scan the top 1000 ports on a /24 netblock.
-
-On average, with threads set to 1000 it takes about 2 mins on Kali to scan the top 1000 ports on a /24 netblock.
 
 Usage:
 
-python3 portscanner.py
+python3 jenkins-hunter.py
 
 The enter IP block and thread count when prompted.
 
-All hosts with open ports are written to a file in the current working directory named "scanresults.txt"
 
 STEPS TO PERSISTENTLY INCREASE ulimit on Mac and Linux to allow for more threads:
 
