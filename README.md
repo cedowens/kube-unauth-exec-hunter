@@ -1,6 +1,6 @@
 # Windows SMB Share Enumerator
 
-Python3 script that uses a set of credentials, sweeps a subnet for hosts with port 445 open, and then checks to see if the provided credentials can view any shares. If so, it will list out the shares it can enumerate.
+Python3 script that allows you to quickly check what Windows shares and systems you have access to with a set of AD credentials. This script sweeps a subnet for hosts with port 445 open, and then checks to see if the provided credentials can view any shares. If so, it will list out the shares it can enumerate.
 
 Since this script uses threading to run faster, you must first check the ulimit set on your host.
 
@@ -14,14 +14,13 @@ Since this is opens connections to ports and IPs concurrently, you'll need to se
 
 Generally, I would recommend setting threads to 250 on Mac systems and 1000 on Kali or other Linux distros unless you follow the steps below to up the ulimit cap on your system.
 
+first run pip3 install -r requirements.txt
+
+-------------------------
 
 Usage:
 
-pip3 install -r requirements.txt
-
-python3 smb-enumerator.py -r <IP block> -u <username> -d <domain> -t <threads>
-
-For use in Box corp environment, you can set the -d flag to AD.
+python3 smb-enumerator.py -r [IPBLOCK] -u [USERNAME] -d [DOMAIN] -t [THREADS]
 
 The enter password when prompted.
 
@@ -37,3 +36,4 @@ https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maxi
 DISCLAIMER
 
 Use at your own risk. Do not use without the appropriate authorizations.
+
