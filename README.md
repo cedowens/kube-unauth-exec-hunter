@@ -1,8 +1,6 @@
-# Jenkins Hunter
+# Windows SMB Share Enumerator
 
-Python3 script that uses a queue and threads to concurrently sweep an IP block for the port specified and then checks for unauthenticated Jenkins instances.
-
-This can be useful for both blue and red teams. From a red team perspective, unauthenticated Jenkins hosts provide quick initial access points for attackers and this script will help find these hosts quicker. From a blue team perspective, this script can be proactively run to identify unauthenticated Jenkins and remediate them before an attacker does.
+Python3 script that uses a set of credentials, sweeps a subnet for hosts with port 445 open, and then checks to see if the provided credentials can view any shares. If so, it will list out the shares it can enumerate.
 
 Since this script uses threading to run faster, you must first check the ulimit set on your host.
 
@@ -19,14 +17,22 @@ Generally, I would recommend setting threads to 250 on Mac systems and 1000 on K
 
 Usage:
 
-python3 jenkins-hunter.py
+pip3 install -r requirements.txt
 
-The enter IP block and thread count when prompted.
+python3 smb-enumerator.py -r <IP block> -u <username> -d <domain> -t <threads>
 
+For use in Box corp environment, you can set the -d flag to AD.
+
+The enter password when prompted.
+
+
+-------------------------
 
 STEPS TO PERSISTENTLY INCREASE ulimit on Mac and Linux to allow for more threads:
 
 https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac
+
+------------------------
 
 DISCLAIMER
 
