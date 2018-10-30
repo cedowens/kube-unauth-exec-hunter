@@ -1,13 +1,26 @@
-# Simple Powershell One-Liners
+# Page Finder Python 3 Script
 
-Listing of some basic and useful powershell one liners:
+Python3 script that searches for a few interesting web pages. This script is currently hard coded to search only on port 8080, but that can easily be modified in the code.
 
--Dump all active AD user accounts and show their username (samaccoutname), first name (GivenName), last name (Surname), email address (mail), and title (title):
-Get-ADUser -Filter ("Enabled -eq 'True'") -Properties samaccountname,GivenName,Surname,mail,title | Select-Object samaccountname,GivenName,Surname,mail,title | export-csv <path to csv>
+This script works in the following way:
 
--Dump all computers in AD and show the server name, OS, Location, IP Address, and lastlogondate fields:
-Get-ADComputer -Filter * -Properties Name,OperatingSystem,Location,IPv4Address,lastlogondate | Select-Object Name,OperatingSystem,Location,IPv4Address,lastlogondate | export-csv <path to csv>
+1. Prompts for IP range and number of threads (note: ulimit -n will show you the max number of threads currently configured on your device; that number can be increased)
+2. Attempts a socket connection to hosts in the provided IP range
+3. Builds a list of all hosts it was able to successfully connect to port 8080 on
+4. For each host in the list (#3 above), the script searches for the following interesting pages:
 
--List all domain controllers via powershell:
-Get-ADDomainController -Filter * | Select-Object Name
+-Jenkins unauthenticated script console page (/script)
 
+-Tomcat HTML Manager page (/manager/html)
+
+-Tomcat Text Manager page (/manager/text)
+
+-/Console page (such as what is used by the Werkzeug debugger)
+
+-/Command page (any interesting pages)
+
+
+Usage:
+-pip3 install -r requirements.txt
+
+-python3 page-hunter.py
