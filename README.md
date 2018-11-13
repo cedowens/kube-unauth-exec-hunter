@@ -1,15 +1,18 @@
-# Devtools LFI Finder Python 3 Script
+# Phishing Difficulty Scoring Tool
 
-Python3 script that searches for LFI vulnerabilities in the versions_redirect_url parameter on devtools hosts running web servers on port 90.
+This is a simple python3 script that allows teams to run their internal phishing email exercises through a scoring model to determine the phishing difficulty.
 
-This script works in the following way:
+The script presents a series of questions and then scores the difficulty based on the answers selected.
 
-1. Prompts for IP range and number of threads (note: ulimit -n will show you the max number of threads currently configured on your device; that number can be increased)
-2. Attempts a socket connection to hosts in the provided IP range
-3. Builds a list of all hosts it was able to successfully connect to port 8080 on
-4. For each host in the list (#3 above), the script searches for the /var/log/httpd/access_log file to see if it is injectable:
+If you disagree with the ranges or point levels, feel free to edit them to your liking.
+
+This can be helpful when reporting on internal phishing exercise metrics to help put those metrics in the context of perceived difficulty level.
+
+Once complete, the script writes the results to a file in the current directory for archiving/reference.
+
+-------------------------
 
 Usage:
--pip3 install -r requirements.txt
 
--python3 devtools-lfi-checker.py
+python3 PhishDifficultyScorer.py
+
