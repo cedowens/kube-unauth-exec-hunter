@@ -52,7 +52,7 @@ def execchecker(host):
     url = "https://" + host + ":" + str(port) + "/pods"
     
     try:
-        response = requests.get(url, verify=False)
+        response = requests.get(url, verify=False, timeout=1)
         
         if (response.status_code == 200 and ('namespace' in response.text or 'Namespace' in response.text) and ('pod' in response.text or 'Pod' in response.text)):
             print("+"*40)
