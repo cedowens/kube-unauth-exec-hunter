@@ -4,5 +4,5 @@ Simple python3 script to sweep a network range looking for kubernetes nodes that
 
 instructions:
 1. pip3 install -r requirements.txt
-2. python3 -W ignore kube-exec-hunter.py -r <range> -t <threads>
+2. python3 -W ignore kube-exec-hunter.py -r [range] -t [threads]
 
